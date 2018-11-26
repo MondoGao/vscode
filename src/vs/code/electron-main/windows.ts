@@ -372,6 +372,7 @@ export class WindowsManager implements IWindowsMainService {
 		};
 	}
 
+	// XXX
 	open(openConfig: IOpenConfiguration): ICodeWindow[] {
 		this.logService.trace('windowsManager#open');
 		openConfig = this.validateOpenConfig(openConfig);
@@ -447,6 +448,7 @@ export class WindowsManager implements IWindowsMainService {
 		const emptyToOpen = pathsToOpen.filter(win => !win.workspace && !win.folderUri && !win.fileUri && !win.backupPath).length;
 
 		// Open based on config
+		// XXX: 从这开始，继续打断将导致 renderer crash
 		const usedWindows = this.doOpen(openConfig, workspacesToOpen, workspacesToRestore, foldersToOpen, foldersToRestore, emptyToRestore, emptyToOpen, fileInputs, foldersToAdd);
 
 		// Make sure to pass focus to the most relevant of the windows if we open multiple
@@ -690,6 +692,7 @@ export class WindowsManager implements IWindowsMainService {
 				const fileInputsForWindow = (fileInputs && fileInputs.remoteAuthority === remoteAuthority) ? fileInputs : void 0;
 
 				// Do open folder
+				// XXX
 				usedWindows.push(this.doOpenFolderOrWorkspace(openConfig, { folderUri: folderToOpen, remoteAuthority }, openFolderInNewWindow, fileInputsForWindow));
 
 				// Reset these because we handled them
@@ -781,11 +784,13 @@ export class WindowsManager implements IWindowsMainService {
 		return window;
 	}
 
+	// XXX
 	private doOpenFolderOrWorkspace(openConfig: IOpenConfiguration, folderOrWorkspace: IPathToOpen, forceNewWindow: boolean, fileInputs: IFileInputs, windowToUse?: ICodeWindow): ICodeWindow {
 		if (!forceNewWindow && !windowToUse && typeof openConfig.contextWindowId === 'number') {
 			windowToUse = this.getWindowById(openConfig.contextWindowId); // fix for https://github.com/Microsoft/vscode/issues/49587
 		}
 
+		// XXX
 		const browserWindow = this.openInBrowserWindow({
 			userEnv: openConfig.userEnv,
 			cli: openConfig.cli,
@@ -1197,6 +1202,7 @@ export class WindowsManager implements IWindowsMainService {
 		this.open({ context: openConfig.context, cli: openConfig.cli, forceNewWindow: true, forceEmpty: !cliArgs.length && !folderUris.length && !fileUris.length, userEnv: openConfig.userEnv });
 	}
 
+	// XXX
 	private openInBrowserWindow(options: IOpenBrowserWindowOptions): ICodeWindow {
 
 		// Build IWindowConfiguration from config and options
@@ -1257,6 +1263,7 @@ export class WindowsManager implements IWindowsMainService {
 			}
 
 			// Create the window
+			// XXX
 			window = this.instantiationService.createInstance(CodeWindow, {
 				state,
 				extensionDevelopmentPath: configuration.extensionDevelopmentPath,

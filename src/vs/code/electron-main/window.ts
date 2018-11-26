@@ -526,6 +526,7 @@ export class CodeWindow extends Disposable implements ICodeWindow {
 
 		// Load URL
 		perf.mark('main:loadWindow');
+		// XXX
 		this._win.loadURL(this.getUrl(configuration));
 
 		// Make window visible if it did not open in N seconds because this indicates an error
@@ -571,6 +572,7 @@ export class CodeWindow extends Disposable implements ICodeWindow {
 		this.load(configuration, true, disableExtensions);
 	}
 
+	// XXX
 	private getUrl(windowConfiguration: IWindowConfiguration): string {
 
 		// Set window ID
@@ -629,6 +631,7 @@ export class CodeWindow extends Disposable implements ICodeWindow {
 		return configUrl;
 	}
 
+	// XXX
 	private doGetUrl(config: object): string {
 		return `${require.toUrl('vs/code/electron-browser/workbench/workbench.html')}?config=${encodeURIComponent(JSON.stringify(config))}`;
 	}

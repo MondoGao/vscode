@@ -106,6 +106,7 @@ class ExpectedError extends Error {
 	public readonly isExpected = true;
 }
 
+// 启动一个多实例间的 IPC 通信
 function setupIPC(accessor: ServicesAccessor): Thenable<Server> {
 	const logService = accessor.get(ILogService);
 	const environmentService = accessor.get(IEnvironmentService);
@@ -132,6 +133,8 @@ function setupIPC(accessor: ServicesAccessor): Thenable<Server> {
 	}
 
 	function setup(retry: boolean): Thenable<Server> {
+
+		// Default /Users/mondo/Library/Application Support/code-oss-dev/1.30.0-main.sock
 		return serve(environmentService.mainIPCHandle).then(server => {
 
 			// Print --status usage info

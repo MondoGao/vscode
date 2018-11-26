@@ -18,6 +18,7 @@
     "precommit": "node build/gulpfile.hygiene.js",
     "gulp": "gulp --max_old_space_size=4095",
     "7z": "7z",
+    "debug": "./scripts/code.sh --debug-brk --inspect=5875 --remote-debugging-port=9222 --log='debug'",
     "update-grammars": "node build/npm/update-all-grammars.js",
     "update-localization-extension": "node build/npm/update-localization-extension.js",
     "smoketest": "cd test/smoke && node test/index.js",

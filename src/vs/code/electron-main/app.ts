@@ -689,6 +689,7 @@ export class CodeApplication extends Disposable {
 
 	private afterWindowOpen(accessor: ServicesAccessor): void {
 		const windowsMainService = accessor.get(IWindowsMainService);
+		this.logService.debug(windowsMainService.getWindowCount().toString());
 
 		let windowsMutex: Mutex | null = null;
 		if (platform.isWindows) {
